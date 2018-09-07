@@ -11,7 +11,7 @@ requests.packages.urllib3.disable_warnings()
 
 def OPEN_EXCEL():
     EXCEL_NAME = 'Python Contracts'
-    #EXCEL_NAME = raw_input("Enter LTM workbook path and name: ")
+    #EXCEL_NAME = raw_input("Enter Contract workbook path and name: ")
 
 
     try:
@@ -58,3 +58,16 @@ def EXCEL_MUNGER(PY_WS):
 
 PY_WS = OPEN_EXCEL()
 EXCEL_MUNGER(PY_WS)
+
+
+FILTER SEARCH = /api/node/class/vzFilter.json?query-target-filter=and(eq(vzFilter.name,"{0}")).format(SERVICE)
+CONTRACT SEARCH = /api/node/class/vzBrCP.xml?query-target-filter=and(eq(vzBrCP.name,"{0}")).format(CONTRACT_NAME)
+
+FILTER_CREATE_URL = '/api/node/mo/uni/tn-common/flt-' + {0} + '.json'.format(SERVICE)
+FILTER_CREATE_PAYLOAD = {"vzFilter": {"attributes": {"name": SERVICE,},"children": [{"vzEntry": {"attributes": {"name": SERVICE,"etherT": "ip",	"prot": SERVICE.split(-)[0].lower(),"dFromPort": SERVICE.split(-)[1],"dToPort": SERVICE.split(-)[1],},"children": []}}]}}
+FILTER_CREATE_RESPONE = {"totalCount":"0","imdata":[]}
+
+CONTRACT_CREATE_URL = '/api/node/mo/uni/tn-common/brc-' + {0}'.json'.format(CONTRACT_NAME)
+CONTRACT_CREATE_PAYLOAD = {	"vzBrCP": {	"attributes": {	"name": CONTRACT_NAME.split(_)[0],"scope": "global",},"children": [{"vzSubj": {	"attributes": {	"name": CONTRACT_NAME.split(_)[0] + 'SBJ',},"children": [{"vzRsSubjFiltAtt": {"attributes": {"tnVzFilterName": SERVICE,	"directives": "none"},}}]}}]}}
+CONTRACT_CREATE_RESPONSE = {"totalCount":"0","imdata":[]}
+
